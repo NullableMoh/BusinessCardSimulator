@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Screen" style="position: relative; top: 0; left: 0; height: 147px; right: 0; flex-grow: 1; flex-shrink: 1; flex-direction: row; justify-content: space-between;">
+        <ui:VisualElement name="Left" style="width: 208px;" />
+        <ui:VisualElement name="Center" style="align-items: center; justify-content: center;">
+            <ui:VisualElement style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=8228938214290033325&amp;guid=1b09e44b9c46a004c85813efa26092dd&amp;type=3#console.erroricon&apos;); width: 32px; height: 32px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Right" style="width: 248px;" />
+    </ui:VisualElement>
+</ui:UXML>
