@@ -1,4 +1,6 @@
-﻿interface IUsableItem
+﻿using UnityEngine.InputSystem;
+
+interface IUsableItem
 {
     void UseItem();
 }

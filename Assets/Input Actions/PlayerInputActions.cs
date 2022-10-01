@@ -53,6 +53,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Use Usable Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c95dfb7-7f44-4bcb-87a5-f483243f4aec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pick Up Usable item"",
+                    ""type"": ""Button"",
+                    ""id"": ""c18e0a99-7d2f-4a5f-aeb7-eafb6f000dda"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +150,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5349bcae-b122-4fa0-a482-0aaf8a889f77"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Usable Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54abfcee-27a0-4231-8a7a-97b96b1bd620"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pick Up Usable item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +183,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_UseUsableItem = m_Player.FindAction("Use Usable Item", throwIfNotFound: true);
+        m_Player_PickUpUsableitem = m_Player.FindAction("Pick Up Usable item", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +247,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_UseUsableItem;
+    private readonly InputAction m_Player_PickUpUsableitem;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -212,6 +256,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @UseUsableItem => m_Wrapper.m_Player_UseUsableItem;
+        public InputAction @PickUpUsableitem => m_Wrapper.m_Player_PickUpUsableitem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,6 +276,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @UseUsableItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseUsableItem;
+                @UseUsableItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseUsableItem;
+                @UseUsableItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseUsableItem;
+                @PickUpUsableitem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUpUsableitem;
+                @PickUpUsableitem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUpUsableitem;
+                @PickUpUsableitem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUpUsableitem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +295,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @UseUsableItem.started += instance.OnUseUsableItem;
+                @UseUsableItem.performed += instance.OnUseUsableItem;
+                @UseUsableItem.canceled += instance.OnUseUsableItem;
+                @PickUpUsableitem.started += instance.OnPickUpUsableitem;
+                @PickUpUsableitem.performed += instance.OnPickUpUsableitem;
+                @PickUpUsableitem.canceled += instance.OnPickUpUsableitem;
             }
         }
     }
@@ -252,5 +310,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnUseUsableItem(InputAction.CallbackContext context);
+        void OnPickUpUsableitem(InputAction.CallbackContext context);
     }
 }
