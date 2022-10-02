@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: a0635dfaa5fc76b4db32f0d5f62e581c
+guid: 7eafa9ba4c92c9e429d528a3b1b12275
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Miserator Gun
-    second: {fileID: 2100000, guid: 8a8957fc7e8219c4f9b3e10f2cb5f175, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

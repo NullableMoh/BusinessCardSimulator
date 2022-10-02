@@ -8,13 +8,14 @@ public class UsableItemHolder : MonoBehaviour
     bool canPickUpUsableItem;
 
     UsableItem pickUpableItem;
+    Quaternion lookRot;
 
     UsableItem currentItem;
     PlayerInputActions inputActions;
     
     void Awake()
     {
-        canPickUpUsableItem = true;
+        canPickUpUsableItem = false;
 
         inputActions = new();
         inputActions.Player.Enable();
@@ -27,7 +28,7 @@ public class UsableItemHolder : MonoBehaviour
         if (!currentItem) return;
 
         currentItem.transform.localPosition = Vector3.zero;
-        currentItem.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+        currentItem.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
     }
 
     void UseCurrentItem(InputAction.CallbackContext callbackContext)
@@ -41,13 +42,16 @@ public class UsableItemHolder : MonoBehaviour
     {
         if (!canPickUpUsableItem) return;
 
-        currentItem = null;
-        currentItem.transform.parent = null;
+        if(currentItem)
+        {
+            currentItem.transform.parent = null;
+            currentItem.transform.position = new Vector3(currentItem.transform.position.x, transform.position.y + 1, currentItem.transform.position.z);
+            currentItem = null;
+        }
 
         currentItem = pickUpableItem;
         currentItem.transform.parent = transform;
         currentItem.transform.localPosition = Vector3.zero;
-        currentItem.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
     }
 
     void OnTriggerEnter(Collider other)
