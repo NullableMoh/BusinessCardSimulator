@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a0635dfaa5fc76b4db32f0d5f62e581c
+guid: 41a798dcfac9ab1468a6df377ebbf4be
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Miserator Gun
-    second: {fileID: 2100000, guid: 8a8957fc7e8219c4f9b3e10f2cb5f175, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: 5ab9698619a67f1489b5ab34345730ae, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
