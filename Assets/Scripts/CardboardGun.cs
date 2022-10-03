@@ -5,13 +5,19 @@ using UnityEngine.InputSystem;
 
 public class CardboardGun : UsableItem
 {
-    [SerializeField] GameObject projectile;
-    [SerializeField] Transform bulletSpawnPoint;
+    [SerializeField] Transform muzzleFlashPosition;
+    [SerializeField] GameObject projectileHitParticle;
+    [SerializeField] GameObject muzzleFlashParticle;
+    [SerializeField] GameObject bulletSpawnPoint;
     [SerializeField] float projectileSpeed;
 
     public override void UseItem()
     {
-        GameObject bullet = Instantiate(projectile, bulletSpawnPoint.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * projectileSpeed * Time.deltaTime;
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit))
+        {
+            Instantiate(muzzleFlashParticle, muzzleFlashPosition.position, Quaternion.LookRotation(Camera.main.transform.forward)s);
+            Instantiate(projectileHitParticle, hit.point, Quaternion.identity);
+        }
+
     }
 }

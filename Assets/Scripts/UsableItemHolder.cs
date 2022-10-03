@@ -26,9 +26,8 @@ public class UsableItemHolder : MonoBehaviour
     void Update()
     {
         if (!currentItem) return;
-
         currentItem.transform.localPosition = Vector3.zero;
-        currentItem.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        currentItem.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
     }
 
     void UseCurrentItem(InputAction.CallbackContext callbackContext)
@@ -51,7 +50,6 @@ public class UsableItemHolder : MonoBehaviour
 
         currentItem = pickUpableItem;
         currentItem.transform.parent = transform;
-        currentItem.transform.localPosition = Vector3.zero;
     }
 
     void OnTriggerEnter(Collider other)

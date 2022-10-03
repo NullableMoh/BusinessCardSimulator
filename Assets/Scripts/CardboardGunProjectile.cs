@@ -8,7 +8,7 @@ public class CardboardGunProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Instantiate(hitParticles);
+        Instantiate(hitParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

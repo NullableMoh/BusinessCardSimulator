@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7825d22e420b034e910962f3251785e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 3809004075326702677, guid: 07ffe09482c60114ba91f72b4600c625,
+  projectileHitParticle: {fileID: 6975384512180290192, guid: 09a3d8b4479c4be4d9555d0d735454c0,
     type: 3}
-  bulletSpawnPoint: {fileID: 2023794269}
-  projectileSpeed: 50
+  bulletSpawnPoint: {fileID: 2023794268}
+  projectileSpeed: 250
