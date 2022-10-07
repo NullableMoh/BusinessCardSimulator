@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2023794269}
   m_Layer: 8
-  m_Name: Bullet Spawn Position
+  m_Name: Bullet Spawn Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7825d22e420b034e910962f3251785e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileHitParticle: {fileID: 6975384512180290192, guid: 09a3d8b4479c4be4d9555d0d735454c0,
+  bulletSpawnTransform: {fileID: 2023794269}
+  bulletParticle: {fileID: 1606311078835033232, guid: 590842fddb546424f9b5d48ddd3a332a,
     type: 3}
-  bulletSpawnPoint: {fileID: 2023794268}
-  projectileSpeed: 250
