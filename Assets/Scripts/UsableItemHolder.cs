@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class UsableItemHolder : MonoBehaviour
 
     UsableItem currentItem;
     PlayerInputActions inputActions;
+
+    public event Action OnItemUsed;
     
     void Awake()
     {
@@ -35,6 +38,7 @@ public class UsableItemHolder : MonoBehaviour
         if (!currentItem) return;
 
         currentItem.UseItem();
+        OnItemUsed?.Invoke();
     }
 
     void PickUpUsableItem(InputAction.CallbackContext callbackContext)
