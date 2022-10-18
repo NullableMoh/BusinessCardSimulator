@@ -9,6 +9,7 @@ public class CardboardGun : UsableItem
     [SerializeField] Transform bulletSpawnTransform;
     [SerializeField] CardboardGunBullet bulletParticle;
     [SerializeField] AudioClip gunshotSound;
+    [SerializeField] float recoilFactor;
 
     AudioSource audioSource;
 
@@ -36,5 +37,7 @@ public class CardboardGun : UsableItem
         }
 
         audioSource.PlayOneShot(gunshotSound);
+
+        Camera.main.transform.Rotate(-recoilFactor, 0f, 0f);
     }
 }
