@@ -11,8 +11,23 @@ public class MouseLook : MonoBehaviour
 
     //state
     float xRot;
+    UsableItem currentUsableItem;
 
     PlayerInputActions inputActions;
+
+    UsableItemHolder holder;
+
+    private void OnEnable()
+    {
+        holder = FindObjectOfType<UsableItemHolder>();
+        holder.OnItemPickedUp += SwitchUsableItemForRecoil;
+    }
+
+    private void OnDisable()
+    {
+        holder.OnItemPickedUp -= SwitchUsableItemForRecoil;
+        currentUsableItem.OnUse -= TakeRecoil;
+    }
 
     private void Awake()
     {
@@ -32,11 +47,24 @@ public class MouseLook : MonoBehaviour
         float mouseX = inputActions.Player.Look.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
         float mouseY = inputActions.Player.Look.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
 
-        playerBody.Rotate(0f, mouseX, 0f);
+        xRot -= mouseY;
+        xRot = Mathf.Clamp(xRot, -90f, 90f);
 
-        //if (transform.rotation.x >= -0.5f && transform.rotation.x <= 0.5f)
-            transform.Rotate(-mouseY, 0f, 0f);
-        //else
-            //transform.Rotate(-Mathf.Sign(transform.rotation.x)*1f, 0f, 0f);
+        playerBody.Rotate(0f, mouseX, 0f);
+        transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
+    }
+
+    void TakeRecoil(float recoilAmount)
+    {
+        xRot -= recoilAmount;
+    }
+
+    public void SwitchUsableItemForRecoil(UsableItem usableItem)
+    {
+        if (currentUsableItem)
+            currentUsableItem.OnUse -= TakeRecoil;
+
+        currentUsableItem = usableItem;
+        currentUsableItem.OnUse += TakeRecoil;
     }
 }

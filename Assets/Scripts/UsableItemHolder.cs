@@ -15,6 +15,7 @@ public class UsableItemHolder : MonoBehaviour
     PlayerInputActions inputActions;
 
     public event Action OnItemUsed;
+    public event Action<UsableItem> OnItemPickedUp;
     
     void Awake()
     {
@@ -54,6 +55,7 @@ public class UsableItemHolder : MonoBehaviour
 
         currentItem = pickUpableItem;
         currentItem.transform.parent = transform;
+        OnItemPickedUp?.Invoke(currentItem.GetComponent<UsableItem>());
     }
 
     void OnTriggerEnter(Collider other)
