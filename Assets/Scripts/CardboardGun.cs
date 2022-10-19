@@ -15,7 +15,7 @@ public class CardboardGun : UsableItem
 
     //you need to turn audio into its own script
     //you need to put ALL camera movement things into one script (mouseLook, rename it maybe too)
-    public event Action OnCardboardGunShot;
+    public override event Action<float> OnUse;
 
     private void Start()
     {
@@ -38,6 +38,6 @@ public class CardboardGun : UsableItem
 
         audioSource.PlayOneShot(gunshotSound);
 
-        Camera.main.transform.Rotate(-recoilFactor, 0f, 0f);
+        OnUse?.Invoke(recoilFactor);
     }
 }
