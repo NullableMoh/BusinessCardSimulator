@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class MoneyPresenter : MonoBehaviour
 {
-    int moneyCount;
+    int totalMoney;
 
     Label label;
     MoneyCollector moneyCollector;
@@ -28,12 +28,12 @@ public class MoneyPresenter : MonoBehaviour
 
     private void Awake()
     {
-        moneyCount = 0;
+        totalMoney = 0;
     }
 
-    void UpdateMoneyCount()
+    void UpdateMoneyCount(int moneyValue)
     {
-        moneyCount++;
-        label.text = "$ " + moneyCount.ToString();
+        totalMoney += moneyValue;
+        label.text = "$ " + totalMoney.ToString();
     }
 }
