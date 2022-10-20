@@ -151,6 +151,7 @@ MonoBehaviour:
   bulletParticle: {fileID: 1606311078835033232, guid: 590842fddb546424f9b5d48ddd3a332a,
     type: 3}
   gunshotSound: {fileID: 8300000, guid: 5089d862729b80d468ded1dcafa2b2c7, type: 3}
+  recoilFactor: 7.75
 --- !u!65 &2378397450735669995
 BoxCollider:
   m_ObjectHideFlags: 0

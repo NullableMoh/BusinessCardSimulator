@@ -26,13 +26,14 @@ public class CardboardGun : UsableItem
     {
         var particle = Instantiate(bulletParticle, bulletSpawnTransform.position, Quaternion.identity, bulletSpawnTransform);
 
-        bool raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, LayerMask.GetMask("Ground"));
+        bool raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit);
         if (raycastHit)
         {
             particle.HitPoint = hit.point;
         }
         else
         {
+            particle.ManualDirectionOverride = true;
             particle.Direction = transform.forward;
         }
 
