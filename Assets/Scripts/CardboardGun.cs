@@ -13,8 +13,6 @@ public class CardboardGun : UsableItem
 
     AudioSource audioSource;
 
-    //you need to turn audio into its own script
-    //you need to put ALL camera movement things into one script (mouseLook, rename it maybe too)
     public override event Action<float> OnUse;
 
     private void Start()
@@ -25,20 +23,11 @@ public class CardboardGun : UsableItem
     public override void UseItem()
     {
         var particle = Instantiate(bulletParticle, bulletSpawnTransform.position, Quaternion.identity, bulletSpawnTransform);
-
-        bool raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit);
-        if (raycastHit)
-        {
-            particle.HitPoint = hit.point;
-        }
-        else
-        {
-            particle.ManualDirectionOverride = true;
-            particle.Direction = transform.forward;
-        }
-
+        
+        bool raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, Mathf.Infinity, ~LayerMask.GetMask(Strings.Layers.Player, Strings.Layers.PlayerProjectile, Strings.Layers.UsableItem, Strings.Layers.UsableItemHolder, Strings.Layers.Pickups));
+        particle.CalculateDirection(hit, raycastHit, this);
+        
         audioSource.PlayOneShot(gunshotSound);
-
         OnUse?.Invoke(recoilFactor);
     }
 }

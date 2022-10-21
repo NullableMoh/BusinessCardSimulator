@@ -6,10 +6,8 @@ public class CardboardGunBullet : PlayerProjectile
 {
     [SerializeField] float bulletSpeed, destroyTimeAfterHit;
 
-    public bool ManualDirectionOverride;
-    public Vector3 HitPoint;
-    public Vector3 Direction;
-    Vector3 initialPosition;
+    bool hitPointDirection;
+    Vector3 hitPoint, direction, initialPosition;
 
     Collider col;
     Rigidbody rb;
@@ -17,7 +15,7 @@ public class CardboardGunBullet : PlayerProjectile
 
     private void Awake()
     {
-        ManualDirectionOverride = false;
+        hitPointDirection = false;
     }
 
     IEnumerator Start()
@@ -32,10 +30,24 @@ public class CardboardGunBullet : PlayerProjectile
 
     void FixedUpdate()
     {
-        if(!ManualDirectionOverride)
-            Direction = (HitPoint - initialPosition).normalized;
+        if(hitPointDirection)
+            direction = (hitPoint - initialPosition).normalized;
     
-        rb.velocity = Direction * bulletSpeed * Time.fixedDeltaTime;
+        rb.velocity = direction * bulletSpeed * Time.fixedDeltaTime;
+    }
+
+    public void CalculateDirection(RaycastHit hit, bool raycastHit, CardboardGun gun)
+    {
+        if(raycastHit)
+        {
+            hitPointDirection = true;
+            hitPoint = hit.point;
+        }
+        else
+        {
+            hitPointDirection = false;
+            direction = Camera.main.transform.forward;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
