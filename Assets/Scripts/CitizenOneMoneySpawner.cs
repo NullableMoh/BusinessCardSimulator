@@ -16,7 +16,6 @@ public class CitizenOneMoneySpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("trigger");
         if (collider.gameObject.GetComponent<PlayerProjectile>() && remainingMoneySpawns > 0)
         {
             remainingMoneySpawns--;

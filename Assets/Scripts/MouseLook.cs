@@ -26,7 +26,9 @@ public class MouseLook : MonoBehaviour
     private void OnDisable()
     {
         holder.OnItemPickedUp -= SwitchUsableItemForRecoil;
-        currentUsableItem.OnUse -= TakeRecoil;
+
+        if (currentUsableItem)
+            currentUsableItem.OnUse -= TakeRecoil;
     }
 
     private void Awake()
