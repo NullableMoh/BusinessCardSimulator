@@ -6,73 +6,49 @@ using UnityEngine.InputSystem;
 
 public class UsableItemHolder : MonoBehaviour
 {
-    bool canPickUpUsableItem;
+    [SerializeField] UsableItemSlot[] itemSlots;
 
-    UsableItem pickUpableItem;
-    Quaternion lookRot;
+    int currentItemSlotIndex;
 
-    UsableItem currentItem;
-    PlayerInputActions inputActions;
-
-    public event Action OnItemUsed;
-    public event Action<UsableItem> OnItemPickedUp;
-    
     void Awake()
     {
-        canPickUpUsableItem = false;
-
-        inputActions = new();
-        inputActions.Player.Enable();
-        inputActions.Player.UseUsableItem.performed += UseCurrentItem;
-        inputActions.Player.PickUpUsableitem.performed += PickUpUsableItem;
+        currentItemSlotIndex = 0;
     }
-    
+
+    private void Start()
+    {
+       for(int i = 0; i < itemSlots.Length; i++)
+       {
+            if(i == currentItemSlotIndex)
+            {
+                itemSlots[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                itemSlots[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
     void Update()
     {
-        if (!currentItem) return;
-        currentItem.transform.localPosition = Vector3.zero;
-        currentItem.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
-    }
-
-    void UseCurrentItem(InputAction.CallbackContext callbackContext)
-    {
-        if (!currentItem) return;
-
-        currentItem.UseItem();
-        OnItemUsed?.Invoke();
-    }
-
-    void PickUpUsableItem(InputAction.CallbackContext callbackContext)
-    {
-        if (!canPickUpUsableItem) return;
-
-        if(currentItem)
+        for (int i = 0; i < 9; i++)
         {
-            currentItem.transform.parent = null;
-            currentItem.transform.position = new Vector3(currentItem.transform.position.x, transform.position.y + 1, currentItem.transform.position.z);
-            currentItem = null;
-        }
-
-        currentItem = pickUpableItem;
-        currentItem.transform.parent = transform;
-        OnItemPickedUp?.Invoke(currentItem.GetComponent<UsableItem>());
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<UsableItem>())
-        {
-            canPickUpUsableItem = true;
-            pickUpableItem = other.GetComponent<UsableItem>();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<UsableItem>())
-        {
-            canPickUpUsableItem = false;
-            pickUpableItem = null;
+            if (Input.GetKeyDown((KeyCode)(i + 49)))
+            {
+                currentItemSlotIndex = i;
+                for (int q = 0; q < itemSlots.Length; q++)
+                {
+                    if (q == currentItemSlotIndex)
+                    {
+                        itemSlots[q].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        itemSlots[q].gameObject.SetActive(false);
+                    }
+                }
+            }
         }
     }
 }

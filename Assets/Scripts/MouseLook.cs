@@ -11,24 +11,26 @@ public class MouseLook : MonoBehaviour
 
     //state
     float xRot;
-    UsableItem currentUsableItem;
+    UsableItem[] usableItems;
 
     PlayerInputActions inputActions;
 
-    UsableItemHolder holder;
-
     private void OnEnable()
     {
-        holder = FindObjectOfType<UsableItemHolder>();
-        holder.OnItemPickedUp += SwitchUsableItemForRecoil;
+        usableItems = FindObjectsOfType<UsableItem>();
+        foreach(var usableItem in usableItems)
+        {
+            usableItem.OnItemUsed += TakeRecoil;
+        }
     }
 
     private void OnDisable()
     {
-        holder.OnItemPickedUp -= SwitchUsableItemForRecoil;
+        foreach (var usableItem in usableItems)
+        {
+            usableItem.OnItemUsed -= TakeRecoil;
+        }
 
-        if (currentUsableItem)
-            currentUsableItem.OnUse -= TakeRecoil;
     }
 
     private void Awake()
@@ -59,14 +61,5 @@ public class MouseLook : MonoBehaviour
     void TakeRecoil(float recoilAmount)
     {
         xRot -= recoilAmount;
-    }
-
-    public void SwitchUsableItemForRecoil(UsableItem usableItem)
-    {
-        if (currentUsableItem)
-            currentUsableItem.OnUse -= TakeRecoil;
-
-        currentUsableItem = usableItem;
-        currentUsableItem.OnUse += TakeRecoil;
     }
 }
