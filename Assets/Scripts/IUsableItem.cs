@@ -3,6 +3,6 @@ using UnityEngine.InputSystem;
 
 interface IUsableItem
 {
-    void UseItem();
-    public event Action<float> OnUse;
+    void UseItem(InputAction.CallbackContext callbackContext);
+    public event Action<float> OnItemUsed;
 }

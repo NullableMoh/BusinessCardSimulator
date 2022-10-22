@@ -14,7 +14,7 @@ public class CitizenOneStateMachine : MonoBehaviour
 
     string currentAnimState;
     float currentSpeed;
-    UsableItemHolder usableItemHolder;
+    UsableItem[] usableItems;
     Transform playerTransform;
 
     AudioSource audioSource;
@@ -23,15 +23,17 @@ public class CitizenOneStateMachine : MonoBehaviour
 
     private void OnEnable()
     {
-        usableItemHolder = FindObjectOfType<UsableItemHolder>();
-        playerTransform = usableItemHolder.transform;
+        usableItems = FindObjectsOfType<UsableItem>();
+        playerTransform = FindObjectOfType<PlayerMovement>().transform;
 
-        usableItemHolder.OnItemUsed += TryRun;
+        foreach(var usableItem in usableItems)
+            usableItem.OnItemUsed += TryRun;
     }
 
     private void OnDisable()
     {
-        usableItemHolder.OnItemUsed -= TryRun;
+        foreach (var usableItem in usableItems)
+            usableItem.OnItemUsed -= TryRun;
     }
 
     private void Awake()
@@ -52,7 +54,7 @@ public class CitizenOneStateMachine : MonoBehaviour
         rb.velocity = currentSpeed * transform.forward * Time.fixedDeltaTime;
     }
 
-    void TryRun()
+    void TryRun(float recoil)
     {
         if(Vector3.Distance(playerTransform.position, transform.position) < gunSensitivityRange)
         {
