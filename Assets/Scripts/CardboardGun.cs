@@ -25,13 +25,11 @@ public class CardboardGun : UsableItem
     private void OnEnable()
     {
         inputActions.Player.UseUsableItem.performed += UseItem;
-        inputActions.Player.PickUpUsableitem.performed += TrySwitchItem;
     }
 
     private void OnDisable()
     {
         inputActions.Player.UseUsableItem.performed -= UseItem;
-        inputActions.Player.PickUpUsableitem.performed -= TrySwitchItem;
     }
 
     private void Start()
@@ -52,21 +50,4 @@ public class CardboardGun : UsableItem
         OnItemUsed?.Invoke(recoilFactor);
     }
 
-    public override void TrySwitchItem(InputAction.CallbackContext callbackContext)
-    {
-        if (transform.parent == null) return;
-
-        var raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, Mathf.Infinity, LayerMask.GetMask(Strings.Layers.UsableItem));
-        if(raycastHit)
-        {
-            var usableItem = hit.transform.gameObject.GetComponent<UsableItem>();
-            if (usableItem)
-            {
-                usableItem.transform.parent = transform.parent;
-                usableItem.transform.localPosition = Vector3.zero;
-                usableItem.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
-                transform.parent = null;
-            }
-        }
-    }
 }

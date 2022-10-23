@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UsableItemHolder : MonoBehaviour
+public class UsableItemSlotSelector : MonoBehaviour
 {
     [SerializeField] UsableItemSlot[] itemSlots;
 
