@@ -36,7 +36,7 @@ public class CardboardGunBullet : PlayerProjectile
         rb.velocity = direction * bulletSpeed * Time.fixedDeltaTime;
     }
 
-    public void CalculateDirection(RaycastHit hit, bool raycastHit, CardboardGun gun)
+    public override void CalculateDirection(RaycastHit hit, bool raycastHit, CardboardGun gun)
     {
         if(raycastHit)
         {

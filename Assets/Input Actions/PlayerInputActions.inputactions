@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Usable Item Optional 2nd Ability",
+                    "type": "Button",
+                    "id": "a65b5a78-ea11-4cc3-b962-70892d18ac59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pick Up Usable item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b968f33-694a-4681-97da-0d6d08f666f2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Usable Item Optional 2nd Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

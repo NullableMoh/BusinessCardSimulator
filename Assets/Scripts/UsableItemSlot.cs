@@ -41,8 +41,11 @@ public class UsableItemSlot : MonoBehaviour
                 usableItem.transform.localPosition = Vector3.zero;
                 usableItem.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
 
-                childUsableItem.transform.parent = null;
-                childUsableItem = GetComponentInChildren<UsableItem>();
+                if(childUsableItem)
+                {
+                    childUsableItem.transform.parent = null;
+                    childUsableItem = GetComponentInChildren<UsableItem>();
+                }
             }
         }
     }
