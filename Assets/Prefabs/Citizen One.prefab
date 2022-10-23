@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4316204136849569868}
-  walkSpeed: 150
-  runSpeed: 500
+  walkSpeed: 100
+  runSpeed: 200
   gunSensitivityRange: 5
   randomTurnMinAngle: 45
   randomTurnMaxAngle: 90
