@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4316204137401101055}
   - component: {fileID: 4316204137401101054}
   - component: {fileID: 4316204137401101049}
+  - component: {fileID: 1799889576}
   m_Layer: 12
   m_Name: Citizen One
   m_TagString: Untagged
@@ -200,6 +201,20 @@ MonoBehaviour:
   moneyCluster: {fileID: 6566419288479832859, guid: c119a1a0b389367489c86ac7267f1c0a,
     type: 3}
   totalMoneySpawns: 3
+--- !u!114 &1799889576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4316204137401101040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2594ab1bcd97cad4699e6187c5f34384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dismantledCitizenOne: {fileID: 2155922817363368535, guid: d2a708d1701283d4c872a361de6f3004,
+    type: 3}
 --- !u!1001 &4316204136849569859
 PrefabInstance:
   m_ObjectHideFlags: 0
