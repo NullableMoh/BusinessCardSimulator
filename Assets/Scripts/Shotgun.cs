@@ -18,6 +18,7 @@ public class Shotgun : UsableItem
     PlayerInputActions inputActions;
 
     public override event Action<float> OnItemUsed;
+    public event Action<GameObject> OnShotgunFired;
     public event Action OnShotgunCharging;
 
     private void Awake()
@@ -72,6 +73,7 @@ public class Shotgun : UsableItem
         {
             audioSource.PlayOneShot(gunshotSound);
             OnItemUsed?.Invoke(recoilFactor);
+            OnShotgunFired?.Invoke(hit.transform.gameObject);
             shotgunCharged = false;
 
             Instantiate(bulletHitParticleEffect, hit.point, Quaternion.LookRotation(-Camera.main.transform.forward));
