@@ -9,17 +9,39 @@ public class UsableItemSlotSelector : MonoBehaviour
     [SerializeField] UsableItemSlot[] itemSlots;
 
     int currentItemSlotIndex;
+    bool canSwitchSlot;
+
+    Shotgun shotgun;
+
+    private void OnEnable()
+    {
+        shotgun = FindObjectOfType<Shotgun>();
+        if (!shotgun) return;
+
+        shotgun.OnShotgunCharging += DisableSwitchSlot;
+        shotgun.OnItemUsed += EnableSwitchSlot;
+    }
+
+    private void OnDisable()
+    {
+        if (!shotgun) return;
+
+        shotgun.OnShotgunCharging -= DisableSwitchSlot;
+        shotgun.OnItemUsed -= EnableSwitchSlot;
+    }
 
     void Awake()
     {
         currentItemSlotIndex = 0;
+        canSwitchSlot = true;
     }
+
 
     private void Start()
     {
-       for(int i = 0; i < itemSlots.Length; i++)
-       {
-            if(i == currentItemSlotIndex)
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            if (i == currentItemSlotIndex)
             {
                 itemSlots[i].gameObject.SetActive(true);
             }
@@ -30,8 +52,11 @@ public class UsableItemSlotSelector : MonoBehaviour
         }
     }
 
+    
     void Update()
     {
+        if (!canSwitchSlot) return;
+
         for (int i = 0; i < 9; i++)
         {
             if (Input.GetKeyDown((KeyCode)(i + 49)))
@@ -50,5 +75,14 @@ public class UsableItemSlotSelector : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void DisableSwitchSlot()
+    {
+        canSwitchSlot = false;
+    }
+    void EnableSwitchSlot(float _)
+    {
+        canSwitchSlot = true;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class CitizenOneMoneySpawner : MonoBehaviour
 
     int remainingMoneySpawns;
 
+    public event Action CitizenOneHitByPlayerProjectile;
+
     private void Awake()
     {
         remainingMoneySpawns = totalMoneySpawns;
@@ -19,6 +22,7 @@ public class CitizenOneMoneySpawner : MonoBehaviour
         if (collider.gameObject.GetComponent<PlayerProjectile>() && remainingMoneySpawns > 0)
         {
             remainingMoneySpawns--;
+            CitizenOneHitByPlayerProjectile?.Invoke();
             Instantiate(moneyCluster, transform.position, Quaternion.identity);
         }
     }
