@@ -18,6 +18,7 @@ public class CitizenOneStateMachine : MonoBehaviour
     CitizenOneMoneySpawner moneySpawner;
     AudioSource audioSource;
     Rigidbody rb;
+    CapsuleCollider col;
 
 
     private void OnEnable()
@@ -47,6 +48,7 @@ public class CitizenOneStateMachine : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
 
         StartCoroutine(PlaySound(walkingSound));
@@ -64,7 +66,7 @@ public class CitizenOneStateMachine : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = currentSpeed * transform.forward * Time.fixedDeltaTime;
+        rb.velocity = ((Vector3.up * -100f) + currentSpeed * transform.forward) * Time.fixedDeltaTime;
     }
 
     void TryRun(float recoil)
