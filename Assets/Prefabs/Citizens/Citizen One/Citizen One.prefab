@@ -53,13 +53,11 @@ MonoBehaviour:
   animator: {fileID: 4316204136849569868}
   walkSpeed: 100
   runSpeed: 200
-  gunSensitivityRange: 5
-  randomTurnMinAngle: 45
-  randomTurnMaxAngle: 90
-  randomTurnMinTime: 3
-  randomTurnMaxTime: 5
-  wallHitRandomTurnMinAngle: 135
-  wallHitRandomTurnMaxAngle: 225
+  gunSensitivityRange: 15
+  turnMinTime: 1
+  turnMaxTime: 5
+  turnMinAngle: 145
+  turnMaxAngle: 245
   walkingSound: {fileID: 8300000, guid: 6f7265e3f051ba444bcbe5a7b5a03d7e, type: 3}
 --- !u!54 &4316204137401101052
 Rigidbody:

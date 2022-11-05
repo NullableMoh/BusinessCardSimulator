@@ -5,23 +5,40 @@ using UnityEngine.InputSystem;
 
 public class UsableItemSlot : MonoBehaviour
 {
+
+    bool canSwitchItem;
+
     UsableItem childUsableItem;
     PlayerInputActions inputActions;
+
+    Shotgun shotgun;
 
     private void Awake()
     {
         inputActions = new();
         inputActions.Player.Enable();
+        canSwitchItem = true;
     }
 
     private void OnEnable()
     {
         inputActions.Player.PickUpUsableitem.performed += TrySwitchItem;
+
+        shotgun = FindObjectOfType<Shotgun>();
+        if (!shotgun) return;
+
+        shotgun.OnShotgunCharging += DisableSwitchItem;
+        shotgun.OnItemUsed += EnableSwitchItem;
     }
 
     private void OnDisable()
     {
         inputActions.Player.PickUpUsableitem.performed -= TrySwitchItem;
+        
+        if (!shotgun) return;
+
+        shotgun.OnShotgunCharging -= DisableSwitchItem;
+        shotgun.OnItemUsed -= EnableSwitchItem;
     }
 
     private void Start()
@@ -29,8 +46,21 @@ public class UsableItemSlot : MonoBehaviour
         childUsableItem = GetComponentInChildren<UsableItem>();
     }
 
+    void DisableSwitchItem()
+    {
+        canSwitchItem = false;
+    }
+
+    void EnableSwitchItem(float _)
+    {
+        canSwitchItem = true;
+    }
+
+
     private void TrySwitchItem(InputAction.CallbackContext callbackContext)
     {
+        if (!canSwitchItem) return;
+
         var raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, Mathf.Infinity, LayerMask.GetMask(Strings.Layers.UsableItem));
         if (raycastHit)
         {

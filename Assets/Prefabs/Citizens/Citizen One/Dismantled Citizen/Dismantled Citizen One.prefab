@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2155922816760906892}
   - component: {fileID: 2155922816760906894}
   - component: {fileID: 2155922816760906895}
-  - component: {fileID: 2155922816760906889}
+  - component: {fileID: 8130797304293730240}
   m_Layer: 12
   m_Name: Citizen One Right Arm
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2155922816760906889
+--- !u!114 &8130797304293730240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,10 +74,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2155922816760906893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0619fe8a1fc6fc249a0d1b218e3046cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8adf90ed45d667043a959d06dfc1c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationFactor: {x: 5, y: 5, z: 5}
+  randomDir: {x: 1, y: 0.25, z: 0}
+  speed: 1000
 --- !u!1 &2155922816951879634
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +90,7 @@ GameObject:
   - component: {fileID: 2155922816951879661}
   - component: {fileID: 2155922816951879663}
   - component: {fileID: 2155922816951879660}
-  - component: {fileID: 2155922816951879662}
+  - component: {fileID: 5461513057202795636}
   m_Layer: 12
   m_Name: Citizen One Left Arm
   m_TagString: Untagged
@@ -143,7 +144,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2155922816951879662
+--- !u!114 &5461513057202795636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,10 +153,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2155922816951879634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0619fe8a1fc6fc249a0d1b218e3046cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8adf90ed45d667043a959d06dfc1c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationFactor: {x: 5, y: 5, z: 5}
+  randomDir: {x: -1, y: 0.25, z: 0}
+  speed: 1000
 --- !u!1 &2155922817078036032
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +169,7 @@ GameObject:
   - component: {fileID: 2155922817078036035}
   - component: {fileID: 2155922817078036061}
   - component: {fileID: 2155922817078036034}
-  - component: {fileID: 2155922817078036060}
+  - component: {fileID: 3417112049392138439}
   m_Layer: 12
   m_Name: Citizen One Right Leg
   m_TagString: Untagged
@@ -221,7 +223,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2155922817078036060
+--- !u!114 &3417112049392138439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,10 +232,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2155922817078036032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0619fe8a1fc6fc249a0d1b218e3046cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8adf90ed45d667043a959d06dfc1c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationFactor: {x: 5, y: 5, z: 5}
+  randomDir: {x: 1, y: 0.5, z: 0}
+  speed: 1000
 --- !u!1 &2155922817363368535
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +286,7 @@ GameObject:
   - component: {fileID: 2155922817896341607}
   - component: {fileID: 2155922817896341601}
   - component: {fileID: 2155922817896341606}
-  - component: {fileID: 2155922817896341600}
+  - component: {fileID: 6192815238129191739}
   m_Layer: 12
   m_Name: Citizen One Left Leg
   m_TagString: Untagged
@@ -337,7 +340,7 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: -0.39, y: -0.45, z: 0}
---- !u!114 &2155922817896341600
+--- !u!114 &6192815238129191739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,10 +349,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2155922817896341604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0619fe8a1fc6fc249a0d1b218e3046cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8adf90ed45d667043a959d06dfc1c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationFactor: {x: 5, y: 5, z: 5}
+  randomDir: {x: -1, y: 0.5, z: 0}
+  speed: 1000
 --- !u!1 &2155922817968192559
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +365,7 @@ GameObject:
   - component: {fileID: 2155922817968192558}
   - component: {fileID: 2155922817968192553}
   - component: {fileID: 2155922817968192552}
-  - component: {fileID: 2155922817968192555}
+  - component: {fileID: 8081647768841485688}
   m_Layer: 12
   m_Name: Citizen One Head
   m_TagString: Untagged
@@ -415,7 +419,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2155922817968192555
+--- !u!114 &8081647768841485688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,10 +428,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2155922817968192559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0619fe8a1fc6fc249a0d1b218e3046cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8adf90ed45d667043a959d06dfc1c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationFactor: {x: 5, y: 5, z: 5}
+  randomDir: {x: 0, y: 1, z: 0}
+  speed: 1000
 --- !u!1 &2155922818358694643
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +444,7 @@ GameObject:
   - component: {fileID: 2155922818358694642}
   - component: {fileID: 2155922818358694412}
   - component: {fileID: 2155922818358694413}
-  - component: {fileID: 2155922818358694415}
+  - component: {fileID: 2161743612170384455}
   m_Layer: 12
   m_Name: Citizen One Torso
   m_TagString: Untagged
@@ -493,7 +498,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2155922818358694415
+--- !u!114 &2161743612170384455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -502,10 +507,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2155922818358694643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0619fe8a1fc6fc249a0d1b218e3046cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8adf90ed45d667043a959d06dfc1c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationFactor: {x: 5, y: 5, z: 5}
+  randomDir: {x: 0, y: 0, z: -1}
+  speed: 1000
 --- !u!1001 &4207152896925115373
 PrefabInstance:
   m_ObjectHideFlags: 0

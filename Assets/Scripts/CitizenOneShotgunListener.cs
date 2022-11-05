@@ -10,10 +10,14 @@ public class CitizenOneShotgunListener : MonoBehaviour
     private void OnEnable()
     {
         shotgun = FindObjectOfType<Shotgun>();
+        if (!shotgun) return;
+
         shotgun.OnShotgunFired += CitizenOneTryRegisterHit;
     }
     private void OnDisable()
     {
+        if (!shotgun) return;
+
         shotgun.OnShotgunFired -= CitizenOneTryRegisterHit;
     }
 
