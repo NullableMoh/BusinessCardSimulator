@@ -10,6 +10,7 @@ public class MoneyPresenter : MonoBehaviour
     Label label;
     MoneyCollector moneyCollector;
 
+
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -29,6 +30,11 @@ public class MoneyPresenter : MonoBehaviour
     private void Awake()
     {
         totalMoney = 0;
+    }
+
+    private void Update()
+    {
+        label.text = Time.time.ToString();
     }
 
     void UpdateMoneyCount(int moneyValue)
