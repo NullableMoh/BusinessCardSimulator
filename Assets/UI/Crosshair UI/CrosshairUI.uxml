@@ -1,3 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Screen" style="background-image: url(&apos;project://database/Assets/Sprites/crossHair.png?fileID=2800000&amp;guid=2f156b05234ee914fa1fd6dbb56a312e&amp;type=3#crossHair&apos;); width: 4.5%; height: 8%; -unity-text-align: middle-center; flex-grow: 0; left: 50%; top: 50%; -unity-background-scale-mode: stretch-to-fill;" />
-</ui:UXML>

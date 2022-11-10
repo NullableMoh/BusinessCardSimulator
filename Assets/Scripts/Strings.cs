@@ -8,6 +8,8 @@
         public const string UsableItemHolder = "Usable Item Holder";
         public const string PlayerProjectile = "Player Projectile";
         public const string Pickups = "Pickups";
+        public const string Citizen = "Citzen";
+        public const string Dialogue = "Dialogue";
     }
 
     public static class Animations

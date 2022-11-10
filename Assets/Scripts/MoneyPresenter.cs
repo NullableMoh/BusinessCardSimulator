@@ -1,23 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class MoneyPresenter : MonoBehaviour
 {
     int totalMoney;
 
-    Label label;
+    TextMeshProUGUI text;
     MoneyCollector moneyCollector;
 
 
-    // Start is called before the first frame update
     void OnEnable()
     {
-        var uIDoc = GetComponent<UIDocument>();
-        var rootVisualElement = uIDoc.rootVisualElement;
-        label = rootVisualElement.Q<Label>();
-
         moneyCollector = FindObjectOfType<MoneyCollector>();
         moneyCollector.OnMoneyCollected += UpdateMoneyCount;
     }
@@ -32,14 +27,14 @@ public class MoneyPresenter : MonoBehaviour
         totalMoney = 0;
     }
 
-    private void Update()
+    private void Start()
     {
-        label.text = Time.time.ToString();
+        text = GetComponent<TextMeshProUGUI>();
     }
 
     void UpdateMoneyCount(int moneyValue)
     {
         totalMoney += moneyValue;
-        label.text = "$ " + totalMoney.ToString();
+        text.text = "$ " + totalMoney.ToString();
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1606311078835033232}
   - component: {fileID: 1606311078835033235}
   - component: {fileID: -8963251239286043075}
+  - component: {fileID: -4285845147196682758}
   m_Layer: 10
   m_Name: Cardboard Gun Bullet
   m_TagString: Untagged
@@ -100,9 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 300
   destroyTimeAfterHit: 2
-  ManualDirectionOverride: 0
-  HitPoint: {x: 0, y: 0, z: 0}
-  Direction: {x: 0, y: 0, z: 0}
 --- !u!54 &1606311078835033235
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,9 +114,9 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!65 &-8963251239286043075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132,3 +130,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1875, y: 0.1875, z: 0.1875}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4285845147196682758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912810189043640775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8a12462e23ae04c8430db82ad189f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeTillDestroy: 10
