@@ -1,9 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Screen" style="flex-direction: row; flex-grow: 1; -unity-font-definition: none;">
-        <ui:VisualElement name="Left" style="flex-grow: 1; -unity-font: url(&apos;project://database/Assets/Fonts/minecraft/Minecraft.ttf?fileID=12800000&amp;guid=99d72eab650f56642b0cf44bedbede37&amp;type=3#Minecraft&apos;); -unity-font-definition: none;">
-            <ui:Label text="$0" display-tooltip-when-elided="true" style="font-size: 40%; margin-left: 5%; margin-top: 5%; color: rgb(255, 255, 255);" />
-        </ui:VisualElement>
-        <ui:VisualElement name="Middle" style="flex-grow: 1;" />
-        <ui:VisualElement name="Right" style="flex-grow: 1;" />
-    </ui:VisualElement>
-</ui:UXML>
