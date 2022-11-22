@@ -25,12 +25,15 @@ public class Breakable : MonoBehaviour
     private void OnEnable()
     {
         shotgun = FindObjectOfType<Shotgun>();
+        
+        if (!shotgun) return;
         shotgun.OnShotgunFired += TryTakeDamage;
     }
 
 
     private void OnDisable()
     {
+        if (!shotgun) return;
         shotgun.OnShotgunFired -= TryTakeDamage;
     }
 
@@ -51,7 +54,7 @@ public class Breakable : MonoBehaviour
             meshRend.material.mainTexture = breakMaterialStages[materialStage].mainTexture;
             materialStage++;
             audioSource.PlayOneShot(damageSound);
-            Instantiate(damageParticleSystem);
+            Instantiate(damageParticleSystem, transform.position, Quaternion.identity);
         }
         else
             DestroyByFinalDamage();
@@ -66,7 +69,7 @@ public class Breakable : MonoBehaviour
             materialStage = breakMaterialStages.Length - 1;
             meshRend.material.mainTexture = breakMaterialStages[materialStage].mainTexture;
             audioSource.PlayOneShot(damageSound);
-            Instantiate(damageParticleSystem);
+            Instantiate(damageParticleSystem, transform.position, Quaternion.identity);
 
             materialStage++;
         }
@@ -79,7 +82,7 @@ public class Breakable : MonoBehaviour
         audioSource.PlayOneShot(breakSound);
         col.enabled = false;
         meshRend.enabled = false;
-        Instantiate(damageParticleSystem);
+        Instantiate(damageParticleSystem, transform.position, Quaternion.identity);
         Destroy(gameObject, breakSound.length);
     }
 

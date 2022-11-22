@@ -5,17 +5,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HiddenGuyDialoguePresenter : MonoBehaviour
+public class DialoguePresenter : MonoBehaviour
 {
+    [SerializeField] bool loopDialogue, fadeDialogueWithTime;
     [SerializeField][TextArea(5, 15)] List<string> dialogue;
     [SerializeField] GameObject uIContainer;
-    [SerializeField] float dialogueInterval;
+    [SerializeField] float dialogueInterval, dialogueFadeInterval, dialogueFadeAmount, dialogueFadeWaitTime;
     [SerializeField] AudioClip dialogueAudio;
     [SerializeField] AudioSource dialogueAudioSource;
 
     int dialogueIndex;
     bool uIContainerIsActive, showingDialogue;
-    float audioPlayTime;
+    float audioPlayTime, initialDialogueInterval, timeTillFadeStarts;
 
     TextMeshProUGUI text;
     DialogueActivator dialogueActivator;
@@ -25,6 +26,7 @@ public class HiddenGuyDialoguePresenter : MonoBehaviour
         dialogueIndex = -2;
         audioPlayTime = 0;
         showingDialogue = false;
+        initialDialogueInterval = dialogueInterval;
     }
 
     private void OnEnable()
@@ -43,29 +45,36 @@ public class HiddenGuyDialoguePresenter : MonoBehaviour
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
         UIContainerSetActive(false);
+
+        StartCoroutine(FadeDialogueWithTime());
     }
 
     private void TryActivateDialogue()
     {
-        if (showingDialogue) return;
+        if (showingDialogue)
+        {
+            dialogueInterval = 0;
+        }
+        else
+        {
+            if (dialogueIndex == -2 && !uIContainerIsActive)
+            {
+                UIContainerSetActive(true);
+                dialogueIndex = 0;
+            }
+            else if (dialogueIndex == -1)
+            {
+                UIContainerSetActive(false);
+                dialogueIndex++;
+                return;
+            }
+            else if (dialogueIndex == 0 && !uIContainerIsActive)
+            {
+                UIContainerSetActive(true);
+            }
 
-        if(dialogueIndex == -2 && !uIContainerIsActive)
-        {
-            UIContainerSetActive(true);
-            dialogueIndex = 0;
+            StartCoroutine(SlowlyShowDialogue());
         }
-        else if (dialogueIndex == -1)
-        {
-            UIContainerSetActive(false);
-            dialogueIndex++;
-            return;
-        }
-        else if (dialogueIndex == 0 && !uIContainerIsActive)
-        {
-            UIContainerSetActive(true);
-        }
-
-        StartCoroutine(SlowlyShowDialogue());
     }
 
     IEnumerator SlowlyShowDialogue()
@@ -87,11 +96,37 @@ public class HiddenGuyDialoguePresenter : MonoBehaviour
         {
             dialogueIndex++;
         }
-        else
+        else if(loopDialogue)
         {
             dialogueIndex = -1;
         }
 
+        dialogueInterval = initialDialogueInterval;
+        timeTillFadeStarts = Time.time + dialogueFadeWaitTime;
+    }
+
+    IEnumerator FadeDialogueWithTime()
+    {
+        while (true)
+        {
+            if(!showingDialogue && Time.time >= timeTillFadeStarts)
+            {
+                if (uIContainer.GetComponent<CanvasGroup>().alpha - dialogueFadeAmount >= 0)
+                {
+                    uIContainer.GetComponent<CanvasGroup>().alpha -= dialogueFadeAmount;
+                }
+                else
+                {
+                    uIContainer.GetComponent<CanvasGroup>().alpha = 0;
+                }
+                yield return new WaitForSeconds(dialogueFadeInterval);
+            }
+            else
+            {
+                uIContainer.GetComponent<CanvasGroup>().alpha = 1;
+                yield return new WaitForSeconds(dialogueFadeInterval);
+            }
+        }
     }
 
     IEnumerator PlayDialogueAudio()
