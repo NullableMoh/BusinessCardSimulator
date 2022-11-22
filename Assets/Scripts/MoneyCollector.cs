@@ -12,8 +12,8 @@ public class MoneyCollector : MonoBehaviour
         var money = other.gameObject.GetComponent<Money>();
         if(money)
         {
-            Destroy(money.gameObject);
             OnMoneyCollected?.Invoke(money.Value);
+            Destroy(other.gameObject);
         }
     }
 }

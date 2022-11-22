@@ -29,12 +29,14 @@ public class MoneyPresenter : MonoBehaviour
 
     private void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
+        text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     void UpdateMoneyCount(int moneyValue)
     {
         totalMoney += moneyValue;
-        text.text = "$ " + totalMoney.ToString();
+
+        if (!text) return;
+        text.text = $"${totalMoney}";
     }
 }
