@@ -7,15 +7,15 @@ public class WoodenBossStateMachine : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] float walkSpeed, runSpeed, gunSensitivityRange, turnMinTime, turnMaxTime;
     [SerializeField] int turnMinAngle, turnMaxAngle, health;
-    [SerializeField] AudioClip walkingSound, runningSound;
-    [SerializeField] GameObject damageParticleSystem;
+    [SerializeField] GameObject damageParticleSystem, runningSound, walkingSound, destroySound, stoneLeg;
+    [SerializeField] AudioClip damageSound;
 
     string currentAnimState;
     float currentSpeed;
     int initialHealth;
+    bool isRunning;
     UsableItem[] usableItems;
     Transform playerTransform;
-
     AudioSource audioSource;
     Rigidbody rb;
     CapsuleCollider col;
@@ -41,6 +41,7 @@ public class WoodenBossStateMachine : MonoBehaviour
     {
         currentSpeed = walkSpeed;
         initialHealth = health;
+        isRunning = false;
     }
 
     private void Start()
@@ -49,8 +50,8 @@ public class WoodenBossStateMachine : MonoBehaviour
         col = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
 
-        StartCoroutine(PlaySound(walkingSound));
         StartCoroutine(TurnRandomly());
+        stoneLeg.SetActive(false);
     }
 
     IEnumerator TurnRandomly()
@@ -62,14 +63,29 @@ public class WoodenBossStateMachine : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+        if (isRunning)
+        {
+            runningSound.SetActive(true);
+            walkingSound.SetActive(false);
+        }
+        else
+        {
+            runningSound.SetActive(false);
+            walkingSound.SetActive(true);
+        }
+    }
+
     private void FixedUpdate()
     {
         rb.velocity = ((Vector3.up * -100f) + currentSpeed * transform.forward) * Time.fixedDeltaTime;
     }
 
+
     void TryRun(float recoil)
     {
-        Debug.Log("Try Run");
         if (Vector3.Distance(playerTransform.position, transform.position) >= gunSensitivityRange) return;
         Run();
     }
@@ -78,43 +94,36 @@ public class WoodenBossStateMachine : MonoBehaviour
     {
         currentSpeed = runSpeed;
         PlayAnimation(Strings.Animations.CitizenOne.Running);
-        StopCoroutine(PlaySound(walkingSound));
-        StartCoroutine(PlaySound(runningSound));
+        isRunning = true;
     }
 
     void PlayAnimation(string newState)
     {
-        if (currentAnimState != newState)
-        {
-            currentAnimState = newState;
-            animator.Play(currentAnimState);
-        }
-    }
+        if (currentAnimState == newState) return;
 
-    IEnumerator PlaySound(AudioClip clip)
-    {
-        while (true)
-        {
-            audioSource.PlayOneShot(clip);
-            yield return new WaitForSeconds(clip.length);
-        }
+        currentAnimState = newState;
+        animator.Play(currentAnimState);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.GetComponent<PlayerProjectile>())
-        {
-            Run();
+        if (!other.gameObject.GetComponent<PlayerProjectile>()) return;
 
-            if(health > 0)
-            {
-                health--;
-                Instantiate(damageParticleSystem, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }    
+        Run();
+
+        if(health > 0)
+        {
+            health--;
+            Instantiate(damageParticleSystem, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            audioSource.PlayOneShot(damageSound);
         }
+        else
+        {
+            Instantiate(damageParticleSystem, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            Instantiate(destroySound);
+            stoneLeg.SetActive(true);
+            stoneLeg.transform.parent = null;
+            Destroy(gameObject);
+        }    
     }
 }

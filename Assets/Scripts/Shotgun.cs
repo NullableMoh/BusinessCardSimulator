@@ -48,9 +48,8 @@ public class Shotgun : UsableItem
 
     public void ChargeAbility(InputAction.CallbackContext callbackContext)
     {
-        if (GetComponentInChildren<ShotgunChargeParticleHandler>()) return;
-
         if (transform.parent == null) return;
+        if (GetComponentInChildren<ShotgunChargeParticleHandler>()) return;
 
         var particle = Instantiate(shotgunChargingParticleEffect, chargingParticlesTransform.position, Quaternion.identity, chargingParticlesTransform);
 
@@ -64,6 +63,7 @@ public class Shotgun : UsableItem
     public override void UseItem(InputAction.CallbackContext callbackContext)
     {
         if (transform.parent == null) return;
+
         if (Time.time < chargeSoundPlayStartTime + shotgunChargeSound.length) return;
         if (shotgunCharged == false) return;
 

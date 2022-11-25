@@ -18,5 +18,13 @@
         {
             public const string Running = "Running";
         }
+        public static class UsableItems
+        {
+            public static class StoneLeg
+            {
+                public const string Kick = "Kick";
+                public const string Idle = "Idle";
+            }
+        }
     }
 }
