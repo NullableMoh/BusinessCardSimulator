@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
 
     float xMovement, zMovement;
-    Vector3 velocity, moveVec;
+    Vector3 velocity, moveVec, moveVelBeforeJump;
     PlayerInputActions inputActions;
 
     CharacterController controller;
@@ -46,10 +46,16 @@ public class PlayerMovement : MonoBehaviour
         
         if(inputActions.Player.Jump.IsPressed() && isGrounded)
         {
+            moveVelBeforeJump = moveVec;
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * AccelerationDueToGravity);
         }
 
         velocity.y += AccelerationDueToGravity * Time.deltaTime;
+
+        if (!isGrounded)
+        {
+            moveVec = moveVelBeforeJump;
+        }
     }
 
     private void FixedUpdate()

@@ -12,22 +12,38 @@ public class UsableItemSlotSelector : MonoBehaviour
     bool canSwitchSlot;
 
     Shotgun shotgun;
+    StoneLeg stoneLeg;
 
     private void OnEnable()
     {
         shotgun = FindObjectOfType<Shotgun>();
-        if (!shotgun) return;
+        if (shotgun)
+        {
+            shotgun.OnShotgunCharging += DisableSwitchSlot;
+            shotgun.OnItemUsed += EnableSwitchSlot;
+        }
 
-        shotgun.OnShotgunCharging += DisableSwitchSlot;
-        shotgun.OnItemUsed += EnableSwitchSlot;
+        stoneLeg = FindObjectOfType<StoneLeg>();
+        if(stoneLeg)
+        {
+            stoneLeg.OnStoneLegKickStarted += DisableSwitchSlot;
+            stoneLeg.OnItemUsed += EnableSwitchSlot;
+        }
     }
 
     private void OnDisable()
     {
-        if (!shotgun) return;
+        if (shotgun)
+        {
+            shotgun.OnShotgunCharging -= DisableSwitchSlot;
+            shotgun.OnItemUsed -= EnableSwitchSlot;
+        }
 
-        shotgun.OnShotgunCharging -= DisableSwitchSlot;
-        shotgun.OnItemUsed -= EnableSwitchSlot;
+        if (stoneLeg)
+        {
+            stoneLeg.OnStoneLegKickStarted -= DisableSwitchSlot;
+            stoneLeg.OnItemUsed -= EnableSwitchSlot;
+        }
     }
 
     void Awake()

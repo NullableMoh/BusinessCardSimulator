@@ -12,6 +12,7 @@ public class UsableItemSlot : MonoBehaviour
     PlayerInputActions inputActions;
 
     Shotgun shotgun;
+    StoneLeg stoneLeg;
 
     private void Awake()
     {
@@ -25,20 +26,35 @@ public class UsableItemSlot : MonoBehaviour
         inputActions.Player.PickUpUsableitem.performed += TrySwitchItem;
 
         shotgun = FindObjectOfType<Shotgun>();
-        if (!shotgun) return;
+        if (shotgun)
+        {
+            shotgun.OnShotgunCharging += DisableSwitchItem;
+            shotgun.OnItemUsed += EnableSwitchItem;
+        }
 
-        shotgun.OnShotgunCharging += DisableSwitchItem;
-        shotgun.OnItemUsed += EnableSwitchItem;
+        stoneLeg = FindObjectOfType<StoneLeg>();
+        if(stoneLeg)
+        {
+            stoneLeg.OnStoneLegKickStarted += DisableSwitchItem;
+            stoneLeg.OnItemUsed += EnableSwitchItem;
+        }
     }
 
     private void OnDisable()
     {
         inputActions.Player.PickUpUsableitem.performed -= TrySwitchItem;
         
-        if (!shotgun) return;
+        if (shotgun)
+        {
+            shotgun.OnShotgunCharging -= DisableSwitchItem;
+            shotgun.OnItemUsed -= EnableSwitchItem;
+        }
 
-        shotgun.OnShotgunCharging -= DisableSwitchItem;
-        shotgun.OnItemUsed -= EnableSwitchItem;
+        if (stoneLeg)
+        {
+            stoneLeg.OnStoneLegKickStarted -= DisableSwitchItem;
+            stoneLeg.OnItemUsed -= EnableSwitchItem;
+        }
     }
 
     private void Start()
@@ -56,7 +72,6 @@ public class UsableItemSlot : MonoBehaviour
         canSwitchItem = true;
     }
 
-
     private void TrySwitchItem(InputAction.CallbackContext callbackContext)
     {
         if (!canSwitchItem) return;
@@ -71,11 +86,11 @@ public class UsableItemSlot : MonoBehaviour
                 usableItem.transform.localPosition = Vector3.zero;
                 usableItem.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
 
-                if(childUsableItem)
+                if (childUsableItem)
                 {
                     childUsableItem.transform.parent = null;
-                    childUsableItem = GetComponentInChildren<UsableItem>();
                 }
+                    childUsableItem = GetComponentInChildren<UsableItem>();
             }
         }
     }

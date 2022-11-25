@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Breakable : MonoBehaviour
+public class BlackStoneBreakable : MonoBehaviour
 {
     [SerializeField] Material[] breakMaterialStages;
     [SerializeField] AudioClip damageSound, breakSound;
     [SerializeField] GameObject damageParticleSystem;
+    [SerializeField] int shotgunDamage;
 
     int materialStage;
 
@@ -19,22 +20,24 @@ public class Breakable : MonoBehaviour
 
     private void Awake()
     {
-        materialStage = 0;
+        materialStage = -1;
     }
 
     private void OnEnable()
     {
         shotgun = FindObjectOfType<Shotgun>();
-        
-        if (!shotgun) return;
-        shotgun.OnShotgunFired += TryTakeDamage;
+        if (shotgun)
+        {
+            shotgun.OnShotgunFired += TryTakeDamageFromShotgun;
+        }
     }
-
 
     private void OnDisable()
     {
-        if (!shotgun) return;
-        shotgun.OnShotgunFired -= TryTakeDamage;
+        if (shotgun)
+        {
+            shotgun.OnShotgunFired -= TryTakeDamageFromShotgun;
+        }
     }
 
     // Start is called before the first frame update
@@ -45,36 +48,21 @@ public class Breakable : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.gameObject.GetComponent<PlayerProjectile>()) return;
-
-        if (materialStage < breakMaterialStages.Length)
-        {
-            meshRend.material.mainTexture = breakMaterialStages[materialStage].mainTexture;
-            materialStage++;
-            audioSource.PlayOneShot(damageSound);
-            Instantiate(damageParticleSystem, transform.position, Quaternion.identity);
-        }
-        else
-            DestroyByFinalDamage();
-    }
-
-    private void TryTakeDamage(GameObject obj)
+    private void TryTakeDamageFromShotgun(GameObject obj)
     {
         if (obj != gameObject) return;
+        
+        materialStage += shotgunDamage;
 
         if (materialStage < breakMaterialStages.Length)
         {
-            materialStage = breakMaterialStages.Length - 1;
             meshRend.material.mainTexture = breakMaterialStages[materialStage].mainTexture;
             audioSource.PlayOneShot(damageSound);
             Instantiate(damageParticleSystem, transform.position, Quaternion.identity);
-
-            materialStage++;
         }
         else
             DestroyByFinalDamage();
+
     }
 
     void DestroyByFinalDamage()

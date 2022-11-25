@@ -10,7 +10,7 @@ public class DialogueActivator : MonoBehaviour
     PlayerInputActions inputActions;
 
     public event Action OnTryActivateDialogue;
-
+    
     private void Awake()
     {
         inputActions = new();
