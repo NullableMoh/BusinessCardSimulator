@@ -3,7 +3,17 @@ guid: f5d4534ddc9413849b916f48d23a8d40
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteBoard
+    second: {fileID: 2100000, guid: 8eb3512eb9bd708408b65c78d2f1f18d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteBoardWriting
+    second: {fileID: 2100000, guid: ad10dba636c00ef41838852201f44d68, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

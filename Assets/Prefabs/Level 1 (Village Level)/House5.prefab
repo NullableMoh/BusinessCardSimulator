@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: -10.82, y: 1.06, z: 8.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8091939032951559809}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -100,3 +101,78 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7584044472665248771, guid: 347b77b9d869be7478c6129b5c502787, type: 3}
+--- !u!1001 &18273785
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1215115385163921368}
+    m_Modifications:
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071195
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70709413
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 89.998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091939032933909375, guid: 6bb2db20b797bec499a0d8fab0473d93,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone Breakable Wall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6bb2db20b797bec499a0d8fab0473d93, type: 3}
+--- !u!4 &8091939032951559809 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8091939032933909368, guid: 6bb2db20b797bec499a0d8fab0473d93,
+    type: 3}
+  m_PrefabInstance: {fileID: 18273785}
+  m_PrefabAsset: {fileID: 0}
