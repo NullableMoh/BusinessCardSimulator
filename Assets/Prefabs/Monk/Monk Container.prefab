@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2574213858737124204}
   - component: {fileID: 2574213858737124206}
   - component: {fileID: 2574213858737124207}
+  - component: {fileID: 1224544213}
   m_Layer: 12
   m_Name: Monk Container
   m_TagString: Citizen
@@ -65,10 +66,16 @@ MonoBehaviour:
   loopDialogue: 0
   fadeDialogueWithTime: 1
   dialogue:
+  - hello
+  - would you like to join me for some meditation?
+  - what do you mean "does it work"?
+  - of course it works
   - ...
+  - well not 100%, but it helps decrease stress
   - ...
+  - every day i struggle to not blow my fucking brains out
   uIContainer: {fileID: 7562605588785303928}
-  dialogueInterval: 0.1
+  dialogueInterval: 0.01
   dialogueFadeInterval: 0.1
   dialogueFadeAmount: 0.1
   dialogueFadeWaitTime: 5
@@ -185,6 +192,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1224544213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2574213858737124243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0e3f615e869fe4985bb580771a1bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 12
+  keyVFX: {fileID: 1036747344736945878, guid: 001cb5a94a8a2614b9a69225bec4f7c4, type: 3}
+  damageParticleSystem: {fileID: 1036747344736945878, guid: 873023a89661d414e96811758fc34229,
+    type: 3}
 --- !u!1001 &2574213859110263100
 PrefabInstance:
   m_ObjectHideFlags: 0
