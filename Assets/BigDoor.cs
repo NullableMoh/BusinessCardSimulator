@@ -36,7 +36,11 @@ public class BigDoor : MonoBehaviour
         monkCount--;
 
         if (monkCount <= 0)
+        {
             StartCoroutine(LiftDoor());
+            Debug.Log("door should close");
+        }   
+
     }
 
     IEnumerator LiftDoor()

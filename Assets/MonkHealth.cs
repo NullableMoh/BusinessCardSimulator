@@ -36,7 +36,8 @@ public class MonkHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            Instantiate(keyVFX, transform.position, Quaternion.identity);
+            Instantiate(keyVFX, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            OnKeyCreated?.Invoke();
             Destroy(gameObject);
         }
     }
@@ -52,7 +53,7 @@ public class MonkHealth : MonoBehaviour
 
             if (health <= 0)
             {
-                Instantiate(keyVFX, transform.position, Quaternion.identity);
+                Instantiate(keyVFX, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
                 OnKeyCreated?.Invoke();
                 Destroy(gameObject);
             }
