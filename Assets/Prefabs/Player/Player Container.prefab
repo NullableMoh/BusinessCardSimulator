@@ -218,6 +218,7 @@ MonoBehaviour:
   AccelerationDueToGravity: -20
   jumpHeight: 2
   groundCheck: {fileID: 2850766383371481663}
+  inAirSlowFactor: 0.65
 --- !u!143 &2850766382444067436
 CharacterController:
   m_ObjectHideFlags: 0

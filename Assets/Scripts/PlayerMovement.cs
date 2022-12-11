@@ -8,12 +8,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float AccelerationDueToGravity = -20f;
     [SerializeField] float jumpHeight = 2f;
     [SerializeField] Transform groundCheck;
+    [SerializeField] float inAirSlowFactor = 0.1f;
     
     float groundDistance = 0.4f;
     bool isGrounded;
 
     float xMovement, zMovement;
-    Vector3 velocity, moveVec, moveVelBeforeJump;
+    Vector3 velocity, moveVec, velBeforeNotGrounded;
     PlayerInputActions inputActions;
 
     CharacterController controller;
@@ -42,19 +43,33 @@ public class PlayerMovement : MonoBehaviour
         xMovement = inputActions.Player.Movement.ReadValue<Vector2>().x;
         zMovement = inputActions.Player.Movement.ReadValue<Vector2>().y;
 
-        moveVec = transform.right * xMovement + transform.forward * zMovement;
+        moveVec = (transform.right * xMovement + transform.forward * zMovement).normalized;
         
         if(inputActions.Player.Jump.IsPressed() && isGrounded)
         {
-            moveVelBeforeJump = moveVec;
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * AccelerationDueToGravity);
         }
 
         velocity.y += AccelerationDueToGravity * Time.deltaTime;
 
+        if (isGrounded)
+        {
+            velBeforeNotGrounded = moveVec;
+        }
+
+
         if (!isGrounded)
         {
-            moveVec = moveVelBeforeJump;
+            moveVec = velBeforeNotGrounded;
+            if (Mathf.Abs((moveVec + transform.right * xMovement * inAirSlowFactor).x) <= 1)
+            {
+                moveVec += transform.right * xMovement * inAirSlowFactor;
+            }
+
+            if (Mathf.Abs((moveVec + transform.forward * zMovement * inAirSlowFactor).z) <= 1)
+            {
+                moveVec += transform.forward * zMovement * inAirSlowFactor;
+            }
         }
     }
 

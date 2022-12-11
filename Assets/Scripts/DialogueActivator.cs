@@ -9,7 +9,7 @@ public class DialogueActivator : MonoBehaviour
 
     PlayerInputActions inputActions;
 
-    public event Action OnTryActivateDialogue;
+    public event Action<GameObject> OnTryActivateDialogue;
     
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class DialogueActivator : MonoBehaviour
         var raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, LayerMask.GetMask(Strings.Layers.Citizen) | LayerMask.GetMask(Strings.Layers.Dialogue));
         if(raycastHit && hit.transform.gameObject.CompareTag("Citizen"))
         {
-            OnTryActivateDialogue?.Invoke();
+            OnTryActivateDialogue?.Invoke(hit.transform.gameObject);
         }
     }
 }

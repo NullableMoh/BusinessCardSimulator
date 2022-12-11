@@ -49,8 +49,10 @@ public class DialoguePresenter : MonoBehaviour
         StartCoroutine(FadeDialogueWithTime());
     }
 
-    private void TryActivateDialogue()
+    private void TryActivateDialogue(GameObject obj)
     {
+        if (obj != gameObject) return;
+
         if (showingDialogue)
         {
             dialogueInterval = 0;
