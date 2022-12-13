@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7321534756999636277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0.8, y: -71.5, z: -27.3}
+  m_LocalScale: {x: 150, y: 1000, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7321534757218146520}
@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8501e298d8fc9341a90c426b9cbfec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorLiftTimeInterval: 0
+  doorLiftTimeInterval: 100000
   doorLiftPosition: {fileID: 0}
