@@ -5910,7 +5910,7 @@ PrefabInstance:
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.845
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
@@ -5920,12 +5920,12 @@ PrefabInstance:
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -31.777
+      value: -35.4
       objectReference: {fileID: 0}
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
@@ -5935,7 +5935,7 @@ PrefabInstance:
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
@@ -5950,7 +5950,7 @@ PrefabInstance:
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2850766382444067439, guid: 5f70ed43db694334aa165246d87e8e2a,
         type: 3}
@@ -18691,6 +18691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7652f577470dc499e2cf2f919a6cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyRequiredToExit: 0
 --- !u!1001 &1937714902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21017,6 +21018,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1871809857}
     m_Modifications:
+    - target: {fileID: 2310736224268591302, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: dialogue.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310736224268591302, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: dialogue.Array.data[5]
+      value: you dont have to collect it now though
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310736224268591302, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: dialogue.Array.data[6]
+      value: youll know when you have to
+      objectReference: {fileID: 0}
     - target: {fileID: 8521475783683639364, guid: 1dd3618246757194f99ae6857f5d9e21,
         type: 3}
       propertyPath: m_Name
