@@ -9,14 +9,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpHeight = 2f;
     [SerializeField] Transform groundCheck;
     [SerializeField] float inAirSlowFactor = 0.1f;
+    [SerializeField] AudioClip[] footsteps;
     
     float groundDistance = 0.4f;
     bool isGrounded;
 
-    float xMovement, zMovement;
+    float xMovement, zMovement, soundStartTime;
     Vector3 velocity, moveVec, velBeforeNotGrounded;
     PlayerInputActions inputActions;
 
+    AudioSource audioSource;
     CharacterController controller;
 
     private void Awake()
@@ -28,7 +30,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();    
+        controller = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -55,6 +58,11 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             velBeforeNotGrounded = moveVec;
+
+            if(moveVec.magnitude != 0)
+            {
+                PlaySound(footsteps[Random.Range(0, footsteps.Length)]);
+            }
         }
 
 
@@ -70,6 +78,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 moveVec += transform.forward * zMovement * inAirSlowFactor;
             }
+        }
+    }
+
+    void PlaySound(AudioClip clip)
+    {
+        if(Time.time > soundStartTime)
+        {
+            audioSource.clip = clip;
+            soundStartTime = Time.time + clip.length;
+            audioSource.Play();
         }
     }
 
