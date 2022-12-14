@@ -9,6 +9,7 @@ public class MoneyRequirmentDoors : MonoBehaviour
     float doorLiftStartTime;
     Vector3 doorLiftPostion;
     Coroutine doorLowering;
+    bool doorsLowering;
 
     MoneyPresenter moneyPresenter;
 
@@ -26,17 +27,19 @@ public class MoneyRequirmentDoors : MonoBehaviour
     private void Awake()
     {
         doorLiftPostion = transform.position + Vector3.up * doorDistance;
+        doorsLowering = false;
     }
 
     void LowerDoors()
     {
+        if (doorsLowering) return;
+
         doorLowering = StartCoroutine(Lower());
-        Debug.Log("doors should lower");
+        doorsLowering = true;
     }
 
     IEnumerator Lower()
     {
-        Debug.Log("doors lowering");
         doorLiftStartTime = Time.time;
         while (Time.time < doorLiftStartTime + doorLiftTimeInterval)
         {

@@ -14,7 +14,8 @@ public class StoneLeg : UsableItem
     public override event Action<float> OnItemUsed;
     public event Action OnStoneLegKickStarted;
     public event Action<GameObject> OnStoneLegKicked;
-    
+
+    bool kickDone;
     string currentAnimState;
 
     Animator anim;
@@ -26,6 +27,8 @@ public class StoneLeg : UsableItem
     {
         inputActions = new();
         inputActions.Player.Enable();
+
+        kickDone = true;
     }
 
     private void OnEnable()
@@ -49,10 +52,11 @@ public class StoneLeg : UsableItem
 
     public override void UseItem(InputAction.CallbackContext callbackContext)
     {
-        if (transform.parent == null) return;
+        if (transform.parent == null || !kickDone) return;
 
         PlayAnimation(Strings.Animations.UsableItems.StoneLeg.Kick);
         OnStoneLegKickStarted?.Invoke();
+        kickDone = false;
     }
 
     void PlayAnimation(string newState)
@@ -65,6 +69,8 @@ public class StoneLeg : UsableItem
 
     private void OnKickAnimDone()
     {
+        kickDone = true;
+        
         PlayAnimation(Strings.Animations.UsableItems.StoneLeg.Idle);
 
         var raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, hitRange, ~LayerMask.GetMask(Strings.Layers.Player, Strings.Layers.PlayerProjectile, Strings.Layers.UsableItem, Strings.Layers.UsableItemHolder, Strings.Layers.Pickups));

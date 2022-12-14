@@ -8,10 +8,10 @@ using UnityEngine;
 
 public class MoneyPresenter : MonoBehaviour
 {
-    [SerializeField] bool moneyRequiredToExit;
+    [SerializeField] bool moneyRequiredToExit, resetMoney;
 
     int totalMoney;
-    
+    bool requiredMoneyThresholdReached;
     NextLevel[] nextLevel;
 
     TextMeshProUGUI text;
@@ -39,7 +39,14 @@ public class MoneyPresenter : MonoBehaviour
 
     private void Awake()
     {
+        if (resetMoney)
+        {
+            totalMoney = 0;
+            SaveMoney();
+        }
+
         totalMoney = LoadMoney();
+        requiredMoneyThresholdReached = false;
     }
 
     private void Start()
@@ -61,7 +68,6 @@ public class MoneyPresenter : MonoBehaviour
 
     void UpdateMoneyCount(int moneyValue)
     {
-        Debug.Log("Money count updated");
         totalMoney += moneyValue;
 
         if (!text) return;
@@ -69,9 +75,10 @@ public class MoneyPresenter : MonoBehaviour
         if (moneyRequiredToExit)
         {
             text.text = $"${totalMoney} / $500";
-            if(totalMoney >= 500)
+            if(totalMoney >= 500 && !requiredMoneyThresholdReached)
             {
                 OnMoneyRequirmentMet?.Invoke();
+                requiredMoneyThresholdReached = true;
             }
         }
         else
