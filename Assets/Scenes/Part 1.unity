@@ -28545,13 +28545,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2243437208313637947, guid: 1dd3618246757194f99ae6857f5d9e21,
         type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5538293
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243437208313637947, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243437208313637947, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -13.108299
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243437208313637947, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -0.7000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243437208313637947, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -6.554077
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243437209187263546, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2310736224268591302, guid: 1dd3618246757194f99ae6857f5d9e21,
         type: 3}
       propertyPath: dialogue.Array.size
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2310736224268591302, guid: 1dd3618246757194f99ae6857f5d9e21,
+        type: 3}
+      propertyPath: dialogue.Array.data[4]
+      value: make sure to collect at least $500 for the rounds
       objectReference: {fileID: 0}
     - target: {fileID: 2310736224268591302, guid: 1dd3618246757194f99ae6857f5d9e21,
         type: 3}
@@ -28561,7 +28591,7 @@ PrefabInstance:
     - target: {fileID: 2310736224268591302, guid: 1dd3618246757194f99ae6857f5d9e21,
         type: 3}
       propertyPath: dialogue.Array.data[6]
-      value: youll know when you have to
+      value: you'll know when you have to
       objectReference: {fileID: 0}
     - target: {fileID: 8521475783683639364, guid: 1dd3618246757194f99ae6857f5d9e21,
         type: 3}

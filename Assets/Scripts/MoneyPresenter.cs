@@ -11,7 +11,6 @@ public class MoneyPresenter : MonoBehaviour
     [SerializeField] bool moneyRequiredToExit, resetMoney;
 
     int totalMoney;
-    bool requiredMoneyThresholdReached;
     NextLevel[] nextLevel;
 
     TextMeshProUGUI text;
@@ -46,7 +45,6 @@ public class MoneyPresenter : MonoBehaviour
         }
 
         totalMoney = LoadMoney();
-        requiredMoneyThresholdReached = false;
     }
 
     private void Start()
@@ -75,15 +73,18 @@ public class MoneyPresenter : MonoBehaviour
         if (moneyRequiredToExit)
         {
             text.text = $"${totalMoney} / $500";
-            if(totalMoney >= 500 && !requiredMoneyThresholdReached)
-            {
-                OnMoneyRequirmentMet?.Invoke();
-                requiredMoneyThresholdReached = true;
-            }
         }
         else
         {
             text.text = $"${totalMoney}";
+        }
+    }
+
+    private void Update()
+    {
+        if (totalMoney >= 500)
+        {
+            OnMoneyRequirmentMet?.Invoke();
         }
     }
 

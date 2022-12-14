@@ -13,5 +13,7 @@ public class OverDisplay : MonoBehaviour
         over.SetActive(false);
         yield return new WaitForSeconds(timeTillDisplay);
         over.SetActive(true);
+
+        FindObjectOfType<PlayerMovement>().enabled = false;
     }
 }

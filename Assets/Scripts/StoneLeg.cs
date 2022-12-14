@@ -10,6 +10,7 @@ public class StoneLeg : UsableItem
     [SerializeField] AudioClip hitAudio;
     [SerializeField] GameObject hitParticles;
     [SerializeField] Transform hitParticleSpawnPoint;
+    [SerializeField] AnimationClip kickAnim;
 
     public override event Action<float> OnItemUsed;
     public event Action OnStoneLegKickStarted;
@@ -17,9 +18,9 @@ public class StoneLeg : UsableItem
 
     bool kickDone;
     string currentAnimState;
+    Coroutine kickAnimCoroutine;
 
     Animator anim;
-    StoneLegAnimatorEvents stoneLegAnimEvents;
     AudioSource audioSource;
     PlayerInputActions inputActions;
 
@@ -33,14 +34,11 @@ public class StoneLeg : UsableItem
 
     private void OnEnable()
     {
-        stoneLegAnimEvents = GetComponentInChildren<StoneLegAnimatorEvents>();
-        stoneLegAnimEvents.OnKickAnimFinished += OnKickAnimDone;
         inputActions.Player.UseUsableItem.performed += UseItem;
     }
 
     private void OnDisable()
     {
-        stoneLegAnimEvents.OnKickAnimFinished -= OnKickAnimDone;
         inputActions.Player.UseUsableItem.performed -= UseItem;
     }
 
@@ -57,20 +55,26 @@ public class StoneLeg : UsableItem
         PlayAnimation(Strings.Animations.UsableItems.StoneLeg.Kick);
         OnStoneLegKickStarted?.Invoke();
         kickDone = false;
+        kickAnimCoroutine = StartCoroutine(Kick());
+    }
+
+    IEnumerator Kick()
+    {
+        yield return new WaitForSeconds(kickAnim.length);
+        OnKickAnimDone();
     }
 
     void PlayAnimation(string newState)
     {
         if (currentAnimState == newState) return;
-
+        
         currentAnimState = newState;
         anim.Play(currentAnimState);
     }
 
     private void OnKickAnimDone()
     {
-        kickDone = true;
-        
+        StopCoroutine(kickAnimCoroutine);
         PlayAnimation(Strings.Animations.UsableItems.StoneLeg.Idle);
 
         var raycastHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out var hit, hitRange, ~LayerMask.GetMask(Strings.Layers.Player, Strings.Layers.PlayerProjectile, Strings.Layers.UsableItem, Strings.Layers.UsableItemHolder, Strings.Layers.Pickups));
@@ -82,5 +86,6 @@ public class StoneLeg : UsableItem
         }
 
         OnItemUsed?.Invoke(5f);
+        kickDone = true;
     }
 }
